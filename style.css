@@ -1,24 +1,44 @@
 * {
     border: 2px solid blue;
-
 }
 
 body{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content:space-around;
     align-items: center;
     height: 100vh;
     margin: 0;
+    gap: 15px;
 }
 
 .canvas {
     width: 800px;
     height: 800px;
-
+    display:grid;
+    flex-direction:column;
+    row-gap: 1px;
+    column-gap: 1px;
+    
 }
+
+.row {
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    flex:1;
+    /* align-items: center; */
+}
+
+.pixel {
+    margin: 0;
+    padding: 0;
+    border: 1px solid rgb(85, 157, 86);
+    width: auto;
+}
+
 
 .tools {
     display: flex;
     justify-content: space-evenly;
-
 }
