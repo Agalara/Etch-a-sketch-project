@@ -28,11 +28,13 @@ body{
 .pixel {
     margin: 0;
     padding: 0;
-    border: 1px solid rgb(85, 157, 86);
     display: flex;
     flex-grow: 1;
 }
 
+.visible {
+    border: 1px solid rgb(146, 146, 146);
+}
 
 .tools {
     display: flex;
