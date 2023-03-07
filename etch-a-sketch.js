@@ -1,5 +1,5 @@
 
-let size =7;
+let size =4;
 
 function getRandomIntInclusive(min,max){
     min=Math.ceil(min);
@@ -40,8 +40,26 @@ function paint(){
     }) 
 }
 
+function resetCanvas(){
+
+    const paintPixel = document.querySelectorAll('.pixel');
+    paintPixel.forEach( (pixel) => {
+        if( pixel.style.background != 'white'){
+            pixel.style.background = 'white';
+        }      
+    });
+}
 
 
+reset.addEventListener('click',function (e){
+    
+    resetCanvas();
+    // console.log(e);
+});
+
+grid.addEventListener('click',function (e){
+
+});
 
 createCanvas(size);
 paint();
