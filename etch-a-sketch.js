@@ -1,5 +1,5 @@
 
-let size = 8;
+let size =7;
 
 function createCanvas (size){
 
@@ -13,20 +13,11 @@ function createCanvas (size){
 
             const div= document.createElement('div');
             div.classList.add('pixel');
-            div.textContent=`A`;
             const row=document.querySelector('.canvas');
-            const lastRow=row.lastElementChild;
-            lastRow.appendChild(div);
-
+            const lastRow=row.lastElementChild.appendChild(div);
         }
-    }
-    // const pixel=document.querySelectorAll('.pixel');
-    // pixel.forEach((pixel)=>{
-    //     pixel.height=
-
-    // })        
+    }       
 }
 
 
 createCanvas(size);
-
