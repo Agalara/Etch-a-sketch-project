@@ -7,10 +7,6 @@ function getRandomIntInclusive(min,max){
     return Math.floor( Math.random()*(max - min + 1) + min);
 }
 
-
-
-
-
 function createCanvas (size){
 
     for(let i=0;i<size;i++){
@@ -23,6 +19,7 @@ function createCanvas (size){
 
             const div= document.createElement('div');
             div.classList.add('pixel');
+            div.classList.add('visible');
             const row=document.querySelector('.canvas');
             const lastRow=row.lastElementChild.appendChild(div);
         }
@@ -50,17 +47,31 @@ function resetCanvas(){
     });
 }
 
+function resetButton(){
 
-reset.addEventListener('click',function (e){
+    const reset = document.querySelector('#reset');
+    reset.addEventListener('click',function (e){
     
     resetCanvas();
     // console.log(e);
 });
+}
 
-grid.addEventListener('click',function (e){
+function gridButton(){
 
-});
+    const grid = document.querySelector('#grid');
+    grid.addEventListener('click',function (e){
 
+        const canvas =document.querySelectorAll('.pixel');
+        canvas.forEach((pixel) => {
+            pixel.classList.toggle('visible');
+        
+        });
+    });
+}
+
+gridButton();
+resetButton();
 createCanvas(size);
 paint();
 
