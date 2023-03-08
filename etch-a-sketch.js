@@ -20,6 +20,9 @@ function createCanvas (size){
             const div= document.createElement('div');
             div.classList.add('pixel');
             div.classList.add('visible');
+
+            //This is the no painted class
+            div.classList.add('no-paint');
             const row=document.querySelector('.canvas');
             const lastRow=row.lastElementChild.appendChild(div);
         }
@@ -31,20 +34,33 @@ function paint(){
     paintPixel.forEach((pixel) =>{
         pixel.addEventListener('mouseover',function (e) {
     
-            e.target.style.background = `rgb(${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)})`;
-            console.log(e.target);
+            
+            if(pixel.classList.contains('no-paint')){
+
+                e.target.style.background = `rgb(${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)})`;
+                pixel.classList.toggle('no-paint');
+                console.log(e.target);
+            }
+            else{
+
+                //Take its background color and make it
+                //darker
+
+            }
+            //Remove no painted class so it
+            //makes the color a 10% darker?
+            //rgb(R-0.1*R,G-0.1*G,B-0.1*B)
         })
     }) 
 }
 
 function resetCanvas(){
 
-    const paintPixel = document.querySelectorAll('.pixel');
-    paintPixel.forEach( (pixel) => {
-        if( pixel.style.background != 'white'){
-            pixel.style.background = 'white';
-        }      
-    });
+    const canvas = document.querySelector('.canvas');
+    while(canvas.firstChild){
+        canvas.removeChild(canvas.lastChild);
+    };
+
 }
 
 function resetButton(){
@@ -53,8 +69,10 @@ function resetButton(){
     reset.addEventListener('click',function (e){
     
     resetCanvas();
+    createCanvas(size);
+    paint();    
     // console.log(e);
-});
+    });
 }
 
 function gridButton(){
