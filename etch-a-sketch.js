@@ -20,8 +20,6 @@ function createCanvas (size){
             const div= document.createElement('div');
             div.classList.add('pixel');
             div.classList.add('visible');
-
-            //This is the no painted class
             div.classList.add('no-paint');
             const row=document.querySelector('.canvas');
             const lastRow=row.lastElementChild.appendChild(div);
@@ -29,19 +27,62 @@ function createCanvas (size){
     }       
 }
 
+function rgbStringToNumArray(rgbColorString){
+    
+    //String containing only numbers separated by a space
+    let rgbColorNum =rgbColorString.replace(/,|[a-z]|\(|\)/g,'');
+    
+    //Converting it to an array with just numbers
+    let rgbColorNumArray=rgbColorNum.split(' ').map(Number);
+    console.log(rgbColorNumArray);
+    
+    return rgbColorNumArray;
+}
+
+function numArrayToRgbString(rgbColorNumArray){
+
+    let rgbColorString='rgb(';
+
+    for(let num of rgbColorNumArray){
+        
+        rgbColorString = rgbColorString+(num.toString()+','+' ');
+
+    }
+        rgbColorString-=rgbColorString.charAt(rgbColorString.length-1);
+        rgbColorString+=')';
+
+    console.log(rgbColorString);
+        // let rgbColorString=`rgb(${rgbColorNumArray[0]}, ${rgbColorNumArray[1]}, ${rgbColorNumArray[2]})`;
+    return rgbColorString;
+}
+
+function darkerColor(rgbColorNumArray){
+
+    for (let num of rgbColorNumArray){
+
+        num -= (0.1*num);        
+    }
+    console.log(rgbColorNumArray);
+    return numArrayToRgbString(rgbColorNumArray);    
+}
+
+
 function paint(){
     const paintPixel = document.querySelectorAll('.pixel');
     paintPixel.forEach((pixel) =>{
         pixel.addEventListener('mouseover',function (e) {
     
-            
             if(pixel.classList.contains('no-paint')){
 
                 e.target.style.background = `rgb(${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)})`;
                 pixel.classList.toggle('no-paint');
                 console.log(e.target);
+                console.log(e.target.style.background)
             }
             else{
+
+                //rgbStringToNumArray(e.target.style.background);
+                e.target.style.background = darkerColor(rgbStringToNumArray(e.target.style.background))
 
                 //Take its background color and make it
                 //darker
