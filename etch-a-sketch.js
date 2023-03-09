@@ -1,5 +1,6 @@
 
-let size =4;
+let slider=document.querySelector('#size');
+let size=slider.value;
 
 function getRandomIntInclusive(min,max){
     min=Math.ceil(min);
@@ -34,7 +35,6 @@ function rgbStringToNumArray(rgbColorString){
     
     //Converting it to an array with just numbers
     let rgbColorNumArray=rgbColorNum.split(' ').map(Number);
-    console.log(rgbColorNumArray);
     
     return rgbColorNumArray;
 }
@@ -63,20 +63,13 @@ function paint(){
                 e.target.style.background = `rgb(${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)})`;
                 pixel.classList.toggle('no-paint');
                 console.log(e.target);
-                console.log(e.target.style.background)
+                console.log(e.target.style.background);
             }
             else{
 
                 let rgbNumArray=rgbStringToNumArray(e.target.style.background);
                 e.target.style.background = darkerColor(rgbNumArray);
-
-                //Take its background color and make it
-                //darker
-
             }
-            //Remove no painted class so it
-            //makes the color a 10% darker?
-            //rgb(R-0.1*R,G-0.1*G,B-0.1*B)
         })
     }) 
 }
@@ -87,18 +80,13 @@ function resetCanvas(){
     while(canvas.firstChild){
         canvas.removeChild(canvas.lastChild);
     };
-
 }
 
 function resetButton(){
 
     const reset = document.querySelector('#reset');
     reset.addEventListener('click',function (e){
-    
-    resetCanvas();
-    createCanvas(size);
-    paint();    
-    // console.log(e);
+        initCanvas();
     });
 }
 
@@ -115,6 +103,24 @@ function gridButton(){
     });
 }
 
+function sliderBar(){
+
+    const slider = document.querySelector('#size');
+    slider.addEventListener('click',function (e){
+
+        size=slider.value;
+        initCanvas();
+    });
+}
+
+function initCanvas(){
+
+    resetCanvas();
+    createCanvas(size);
+    paint();
+}
+
+sliderBar();
 gridButton();
 resetButton();
 createCanvas(size);
