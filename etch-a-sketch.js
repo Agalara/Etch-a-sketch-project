@@ -41,31 +41,17 @@ function rgbStringToNumArray(rgbColorString){
 
 function numArrayToRgbString(rgbColorNumArray){
 
-    let rgbColorString='rgb(';
-
-    for(let num of rgbColorNumArray){
-        
-        rgbColorString = rgbColorString+(num.toString()+','+' ');
-
-    }
-        rgbColorString-=rgbColorString.charAt(rgbColorString.length-1);
-        rgbColorString+=')';
-
-    console.log(rgbColorString);
-        // let rgbColorString=`rgb(${rgbColorNumArray[0]}, ${rgbColorNumArray[1]}, ${rgbColorNumArray[2]})`;
-    return rgbColorString;
+    return `rgb(${rgbColorNumArray[0]}, ${rgbColorNumArray[1]}, ${rgbColorNumArray[2]})`;
 }
 
 function darkerColor(rgbColorNumArray){
 
-    for (let num of rgbColorNumArray){
+    for (let i=0;i <= rgbColorNumArray.length-1;i++){
 
-        num -= (0.1*num);        
-    }
-    console.log(rgbColorNumArray);
-    return numArrayToRgbString(rgbColorNumArray);    
+        rgbColorNumArray[i] -= Math.floor(0.1*rgbColorNumArray[i]);      
+    }   
+    return numArrayToRgbString(rgbColorNumArray);
 }
-
 
 function paint(){
     const paintPixel = document.querySelectorAll('.pixel');
@@ -81,8 +67,8 @@ function paint(){
             }
             else{
 
-                //rgbStringToNumArray(e.target.style.background);
-                e.target.style.background = darkerColor(rgbStringToNumArray(e.target.style.background))
+                let rgbNumArray=rgbStringToNumArray(e.target.style.background);
+                e.target.style.background = darkerColor(rgbNumArray);
 
                 //Take its background color and make it
                 //darker
